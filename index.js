@@ -2,8 +2,15 @@
 const BUY_CAKE = "BUY_CAKE";
 const BUY_ICECREAM = "BUY_ICECREAM";
 
-const initialState = {
+/*const initialState = {
   noOfCakes: 10,
+  noOfIceCreams: 20,
+}; */
+
+const cakeInitialState = {
+  noOfCakes: 10,
+};
+const iceCreamInitialState = {
   noOfIceCreams: 20,
 };
 
@@ -25,10 +32,17 @@ const buyIceCreamForMe = () => {
 
 //Reducer to Buy Cake or Ice cream
 
-const buyCakeOrIceCreamReducer = (state = initialState, action) => {
+const buyCakeReducer = (state = cakeInitialState, action) => {
   switch (action.type) {
     case BUY_CAKE:
       return { ...state, noOfCakes: state.noOfCakes - 1 };
+    default:
+      return state;
+  }
+};
+
+const buyIceCreamReducer = (state = iceCreamInitialState, action) => {
+  switch (action.type) {
     case BUY_ICECREAM:
       return { ...state, noOfIceCreams: state.noOfIceCreams - 1 };
     default:
@@ -39,12 +53,20 @@ const buyCakeOrIceCreamReducer = (state = initialState, action) => {
 // Store
 const redux = require("redux");
 const createStore = redux.createStore;
+const combineReducers = redux.combineReducers;
 
-const store = createStore(buyCakeOrIceCreamReducer);
+const rootReducer = combineReducers({
+  cakeReducer: buyCakeReducer,
+  iceReducer: buyIceCreamReducer,
+});
+
+const store = createStore(rootReducer);
 console.log("Initial State", store.getState());
-const unsubscribe = store.subscribe(() =>
-  console.log("Updated State:", store.getState())
-);
+const unsubscribe = store.subscribe(() => {
+  console.log("Updated State of IceCream and Cake :", store.getState());
+  console.log("Updated State of IceCream :", store.getState().iceReducer);
+  console.log("Updated State of Cake :", store.getState().cakeReducer);
+});
 
 //Calling the reducer functionby passing the action object by using dispatch function
 store.dispatch(buyCakeForMe());

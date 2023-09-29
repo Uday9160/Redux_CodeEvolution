@@ -1,25 +1,36 @@
 //Action Type
 const BUY_CAKE = "BUY_CAKE";
+const BUY_ICECREAM = "BUY_ICECREAM";
 
 const initialState = {
   noOfCakes: 10,
+  noOfIceCreams: 20,
 };
 
 // Action Creator
 const buyCakeForMe = () => {
-  let info = "Yes I will buy this for you";
+  let info = "Yes I will buy this Cake for you";
   return {
     type: BUY_CAKE,
     payload: info,
   };
 };
+const buyIceCreamForMe = () => {
+  let info = "Yes I will buy this Ice Cream for you";
+  return {
+    type: BUY_ICECREAM,
+    payload: info,
+  };
+};
 
-//Reducer
+//Reducer to Buy Cake or Ice cream
 
-const buyCakeReducer = (state = initialState, action) => {
+const buyCakeOrIceCreamReducer = (state = initialState, action) => {
   switch (action.type) {
     case BUY_CAKE:
       return { ...state, noOfCakes: state.noOfCakes - 1 };
+    case BUY_ICECREAM:
+      return { ...state, noOfIceCreams: state.noOfIceCreams - 1 };
     default:
       return state;
   }
@@ -29,7 +40,7 @@ const buyCakeReducer = (state = initialState, action) => {
 const redux = require("redux");
 const createStore = redux.createStore;
 
-const store = createStore(buyCakeReducer);
+const store = createStore(buyCakeOrIceCreamReducer);
 console.log("Initial State", store.getState());
 const unsubscribe = store.subscribe(() =>
   console.log("Updated State:", store.getState())
@@ -38,6 +49,6 @@ const unsubscribe = store.subscribe(() =>
 //Calling the reducer functionby passing the action object by using dispatch function
 store.dispatch(buyCakeForMe());
 store.dispatch(buyCakeForMe());
-store.dispatch(buyCakeForMe());
-store.dispatch(buyCakeForMe());
+store.dispatch(buyIceCreamForMe());
+store.dispatch(buyIceCreamForMe());
 unsubscribe();

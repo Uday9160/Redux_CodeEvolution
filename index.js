@@ -1,3 +1,4 @@
+//Action Type
 const BUY_CAKE = "BUY_CAKE";
 
 const initialState = {

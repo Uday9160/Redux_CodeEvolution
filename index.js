@@ -54,18 +54,22 @@ const buyIceCreamReducer = (state = iceCreamInitialState, action) => {
 const redux = require("redux");
 const createStore = redux.createStore;
 const combineReducers = redux.combineReducers;
+//middleware
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
+const applyMiddleware = redux.applyMiddleware;
 
 const rootReducer = combineReducers({
   cakeReducer: buyCakeReducer,
   iceReducer: buyIceCreamReducer,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(logger));
 console.log("Initial State", store.getState());
 const unsubscribe = store.subscribe(() => {
-  console.log("Updated State of IceCream and Cake :", store.getState());
-  console.log("Updated State of IceCream :", store.getState().iceReducer);
-  console.log("Updated State of Cake :", store.getState().cakeReducer);
+  // console.log("Updated State of IceCream and Cake :", store.getState());
+  // console.log("Updated State of IceCream :", store.getState().iceReducer);
+  // console.log("Updated State of Cake :", store.getState().cakeReducer);
 });
 
 //Calling the reducer functionby passing the action object by using dispatch function

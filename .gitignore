@@ -1,2 +1,12 @@
 /node_modules/
 /package-lock.json
+react-redux/node_modules/
+/react-redux/.DS_Store
+/react-redux/.env.local
+/react-redux/.env.development.local
+/react-redux/.env.test.local
+/react-redux/.env.production.local
+
+/react-redux/npm-debug.log*
+/react-redux/yarn-debug.log*
+/react-redux/yarn-error.log*

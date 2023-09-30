@@ -4,7 +4,7 @@ import { buyCakeAction } from "../redux/cakes/CakeActions";
 
 function HooksCakeContainer() {
   const dispatch = useDispatch(); //Same as mapDispatchToProps
-  const cakesNo = useSelector((state) => state.numOfCakes); //Same as mapStateToProps
+  const cakesNo = useSelector((state) => state.cakeRed.numOfCakes); //Same as mapStateToProps
   return (
     <div>
       <h2>Number of Cakes in shop is : {cakesNo}</h2>
